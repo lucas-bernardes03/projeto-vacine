@@ -15,7 +15,7 @@ import org.persistencia.projetovacine.enums.PeriodicidadeEnum;
 @NoArgsConstructor
 public class Vacina {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String titulo;
