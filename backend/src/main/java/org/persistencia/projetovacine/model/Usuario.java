@@ -27,6 +27,6 @@ public class Usuario {
     private String uf;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "alergia_id")
+    @JoinTable(name = "alergia_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "alergia_id"))
     private List<Alergia> alergias;
 }

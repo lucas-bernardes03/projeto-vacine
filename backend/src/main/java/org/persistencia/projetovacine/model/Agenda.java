@@ -22,8 +22,10 @@ public class Agenda {
     private String observacoes;
 
     @ManyToOne
+    @JoinColumn(name = "vacina_id")
     private Vacina vacina;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 }
