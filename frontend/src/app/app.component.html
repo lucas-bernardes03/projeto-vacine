@@ -1,0 +1,19 @@
+<div>
+  <p-sidebar #sidebarRef [(visible)]="sidebarVisible">
+    <ng-template pTemplate="headless">
+      <div class="sidebar">
+        <h1 style="text-align: center">MENU</h1>
+        <div class="menu-list">
+          <span class="menu-item" *ngFor="let item of routes">
+            <a (click)="closeSidebar($event)" [routerLink]="item.path">{{item.title}}</a>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+  </p-sidebar>
+  <p-button (onClick)="sidebarVisible = true" class="w-2 h-2">
+    <i class="pi pi-align-justify"></i>
+  </p-button>
+</div>
+
+<router-outlet></router-outlet>
