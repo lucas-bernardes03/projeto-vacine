@@ -1,0 +1,30 @@
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+<div>
+  <p-sidebar #sidebarRef [(visible)]="sidebarVisible">
+    <ng-template pTemplate="headless">
+      <div class="sidebar">
+        <h1 style="text-align: center;">VACINE</h1>
+        <div class="menu-list">
+          <span class="menu-row" *ngFor="let item of menuRoutes">
+            <div class="menu-item">
+              <span style="font-size: 1.7rem" class="material-symbols-outlined">{{icons[item.path!]}}</span>
+              <a [style]="getStyle(item.path!)" class="menu-link" (click)="closeSidebar($event, item.path!)" [routerLink]="item.path">{{item.title}}</a>
+            </div>
+            <p-divider [style]="{marginBottom: 0}"></p-divider>
+          </span>
+        </div>
+
+        <div class="sidebar-footer">
+          <span style="font-size: 1.7rem" class="material-symbols-outlined">logout</span>
+          <a class="menu-link" [routerLink]="'login'">Logout</a>
+        </div>
+      </div>
+    </ng-template>
+  </p-sidebar>
+  <p-button (onClick)="sidebarVisible = true" class="w-2 h-2">
+    <i class="pi pi-align-justify"></i>
+  </p-button>
+</div>
+
+<router-outlet></router-outlet>
