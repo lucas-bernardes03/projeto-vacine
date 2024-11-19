@@ -1,0 +1,9 @@
+.table-container{
+  margin-top: 2rem;
+}
+
+.table-caption{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

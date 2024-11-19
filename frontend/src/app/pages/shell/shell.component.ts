@@ -1,9 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {Button} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {NgForOf} from '@angular/common';
 import {PrimeTemplate} from 'primeng/api';
-import {Sidebar, SidebarModule} from 'primeng/sidebar';
+import {SidebarModule} from 'primeng/sidebar';
 import {menuRoutes} from '../../app.routes';
 import {RouterLink, RouterOutlet} from '@angular/router';
 
@@ -23,8 +23,6 @@ import {RouterLink, RouterOutlet} from '@angular/router';
   styleUrl: './shell.component.css'
 })
 export class ShellComponent {
-  @ViewChild('sidebarRef') sidebarRef!: Sidebar;
-
   icons: iconList = {
     vacinas: 'syringe',
     agendas: 'bookmark',
@@ -33,7 +31,6 @@ export class ShellComponent {
   }
 
   selectedPage : string = 'agendas'
-  sidebarVisible: boolean = true;
 
   getStyle(page: string){
     if(page == this.selectedPage){
@@ -45,8 +42,7 @@ export class ShellComponent {
     return {}
   }
 
-  closeSidebar(e: Event, selectedPage: string){
-    this.sidebarRef.close(e)
+  selectPage(e: Event, selectedPage: string){
     this.selectedPage = selectedPage
   }
 

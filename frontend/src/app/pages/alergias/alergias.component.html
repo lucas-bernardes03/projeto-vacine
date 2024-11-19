@@ -1,1 +1,37 @@
-<p>alergias works!</p>
+<div class="container">
+  <div class="table-container">
+    <p-table [value]="alergias" [paginator]="true" [rows]="10" [tableStyle]="{'min-width': '80vw'}">
+      <ng-template pTemplate="caption">
+        <div class="table-caption">
+          Alergias
+          <p-button>
+            Adicionar
+            <i class="pi pi-plus" style="margin-left: 1rem; font-weight: bold"></i>
+          </p-button>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nome" style="width: 85%; text-align: center">
+            Nome <p-sortIcon field="nome" />
+          </th>
+          <th style="width: 15%; text-align: center">
+            Ações
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-alergia>
+        <tr>
+          <td style="text-align: center">{{alergia.nome}}</td>
+          <td style="text-align: center">
+            <p-button pTooltip="Editar" tooltipPosition="top"  icon="pi pi-pencil" [text]="true" [rounded]="true"></p-button>
+            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" [text]="true" [rounded]="true"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+.table-container{
+  margin-top: 2rem;
+}
+
+.table-caption{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cancelada{
+  color: #e31212;
+}
+
+.agendada{
+  color: #ffde09;
+}
+
+.realizada{
+  color: #0ad50d;
+}

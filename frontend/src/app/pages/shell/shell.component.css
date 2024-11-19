@@ -1,7 +1,7 @@
 .sidebar{
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  width: 10vw;
 }
 
 .menu-list{
@@ -46,10 +46,21 @@
   justify-content: center;
   text-align: center;
   margin: 1rem;
-  right: 0;
 }
 
 .sidebar-footer, a:hover{
   color: #FFD54F;
   transition: 0.3s;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
+.outlet-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
