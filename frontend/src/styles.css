@@ -12,3 +12,12 @@
 * {
   font-family: Oswald, sans-serif;
 }
+
+.p-datepicker table td > span {
+  width: 2vw;
+  height: 3vh;
+}
+
+.p-datepicker table td{
+  padding: 0
+}

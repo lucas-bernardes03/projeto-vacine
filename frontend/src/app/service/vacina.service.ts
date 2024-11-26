@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Vacina, vacinas} from '../interface/vacina';
+import {Vacina, vacinas, vacinasDropdown} from '../interface/vacina';
 
 @Injectable({
   providedIn: 'root'
@@ -9,5 +9,9 @@ export class VacinaService {
 
   getVacinas(): Vacina[]{
     return vacinas;
+  }
+
+  getVacinasDropdown(): Vacina[]{
+    return vacinasDropdown;
   }
 }

@@ -32,3 +32,26 @@ export const usuarios: Usuario[] = [
   { id: 19, nome: "Gustavo Rocha", dataNascimento: new Date('1990-04-10'), sexo: "M", logradouro: "Rua S", numero: 7788, setor: "Vila Rica", cidade: "Campo Grande", uf: "MS" },
   { id: 20, nome: "Juliana Souza", dataNascimento: new Date('1991-11-28'), sexo: "F", logradouro: "Avenida T", numero: 9900, setor: "Corredor do Limoeiro", cidade: "Aracaju", uf: "SE" },
 ]
+
+export const usuariosDropdown : Usuario[] = [
+  { id: 1, nome: "João Silva" },
+  { id: 2, nome: "Maria Oliveira" },
+  { id: 3, nome: "Carlos Souza" },
+  { id: 4, nome: "Ana Costa" },
+  { id: 5, nome: "Pedro Santos" },
+  { id: 6, nome: "Juliana Lima" },
+  { id: 7, nome: "Ricardo Pereira" },
+  { id: 8, nome: "Mariana Alves" },
+  { id: 9, nome: "Lucas Martins" },
+  { id: 10, nome: "Fernanda Rocha" },
+  { id: 11, nome: "Felipe Costa" },
+  { id: 12, nome: "Patrícia Silva" },
+  { id: 13, nome: "Renato Souza" },
+  { id: 14, nome: "Sabrina Alves" },
+  { id: 15, nome: "André Pereira" },
+  { id: 16, nome: "Camila Rocha" },
+  { id: 17, nome: "Marcos Lima" },
+  { id: 18, nome: "Isabela Martins" },
+  { id: 19, nome: "Gustavo Rocha" },
+  { id: 20, nome: "Juliana Souza" }
+]

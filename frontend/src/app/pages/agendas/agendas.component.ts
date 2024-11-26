@@ -8,6 +8,10 @@ import {TooltipModule} from 'primeng/tooltip';
 import {DialogModule} from 'primeng/dialog';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {EditarAgendaComponent} from './editar-agenda/editar-agenda.component';
+import {Usuario} from '../../interface/usuario';
+import {Vacina} from '../../interface/vacina';
+import {VacinaService} from '../../service/vacina.service';
+import {UsuarioService} from '../../service/usuario.service';
 
 @Component({
   selector: 'app-agendas',
@@ -26,26 +30,30 @@ import {EditarAgendaComponent} from './editar-agenda/editar-agenda.component';
   styleUrl: './agendas.component.css',
 })
 export class AgendasComponent implements OnInit{
-  private readonly _agendaService: AgendaService;
+  private readonly _agendaService: AgendaService
   private readonly _dialogService: DialogService
 
   agendas!: Agenda[];
 
   ref: DynamicDialogRef | undefined
 
-  constructor(agendaService: AgendaService, dialogService : DialogService) {
+  constructor(agendaService: AgendaService,
+              dialogService : DialogService,
+              ) {
     this._agendaService = agendaService;
     this._dialogService = dialogService;
+
   }
 
   ngOnInit() {
     this.agendas = this._agendaService.getAgendas()
+
   }
 
   adicionar(){
     this.ref = this._dialogService.open(EditarAgendaComponent, {
       header: 'Novo Agendamento',
-      width: '40vw',
+      width: '18vw',
       height: '50vh'
     })
   }
