@@ -6,6 +6,7 @@ import {PrimeTemplate} from 'primeng/api';
 import {SidebarModule} from 'primeng/sidebar';
 import {menuRoutes} from '../../app.routes';
 import {RouterLink, RouterOutlet} from '@angular/router';
+import {LoginService} from '../../service/login.service';
 
 @Component({
   selector: 'app-shell',
@@ -23,6 +24,9 @@ import {RouterLink, RouterOutlet} from '@angular/router';
   styleUrl: './shell.component.css'
 })
 export class ShellComponent {
+  constructor(private loginService: LoginService) {
+  }
+
   icons: iconList = {
     vacinas: 'syringe',
     agendas: 'bookmark',
@@ -44,6 +48,10 @@ export class ShellComponent {
 
   selectPage(e: Event, selectedPage: string){
     this.selectedPage = selectedPage
+  }
+
+  logout(){
+    this.loginService.deslogar()
   }
 
   protected readonly menuRoutes = menuRoutes;

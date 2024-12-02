@@ -1,9 +1,24 @@
 <div class="login-page">
-  <span>VACINE</span>
-  <input pInputText type="text" />
-  <p-password [feedback]="false"></p-password>
-  <p-button [routerLink]="''">
+  <h1 style="font-size: 4.5rem">VACINE</h1>
+  <form [formGroup]="form">
+    <div class="fields">
+      <div style="display: flex; flex-direction: column; margin-bottom: 1vh">
+        <label>Usuário</label>
+        <input pInputText type="text" formControlName="usuario"/>
+      </div>
+      <div style="display: flex; flex-direction: column; margin-bottom: 5vh">
+        <label>Senha</label>
+        <p-password [inputStyle]="{'width': '100%'}" [style]="{'width': '100%'}" [feedback]="false" formControlName="senha"></p-password>
+        <label style="margin-top: 1vh">
+          <a [style]="{'color':'white'}" [routerLink]="'/register'">Não tem conta? Cadastre-se</a>
+        </label>
+      </div>
+    </div>
+  </form>
+  <p-button [style]="{'width': '15vw', 'display':'flex', 'justify-content':'center'}" (click)="logar()">
     LOGIN
   </p-button>
 </div>
+
+<p-toast></p-toast>
 

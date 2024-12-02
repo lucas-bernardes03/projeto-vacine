@@ -56,7 +56,6 @@ export class AgendasComponent implements OnInit{
 
   ngOnInit() {
     this.listarAgendas()
-
   }
 
   adicionar(){
