@@ -27,6 +27,10 @@ export class AlergiasComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.alergias = this._alergiaService.getAlergias()
+    this._alergiaService.getAlergias().subscribe({
+      next: result => {
+        this.alergias = result
+      }
+    })
   }
 }

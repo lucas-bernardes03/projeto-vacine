@@ -4,15 +4,13 @@ import org.persistencia.projetovacine.model.Vacina;
 import org.persistencia.projetovacine.service.VacinaServico;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/vacina")
+@CrossOrigin(value = "http://localhost:4200")
 public class VacinaController {
     private final VacinaServico vacinaServico;
 

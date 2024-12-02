@@ -18,4 +18,3 @@ import {DividerModule} from 'primeng/divider';
 export class AppComponent{
 
 }
-

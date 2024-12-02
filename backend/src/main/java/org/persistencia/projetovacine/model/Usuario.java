@@ -4,9 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,7 +30,12 @@ public class Usuario {
     private String cidade;
     private String uf;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "alergia_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "alergia_id"))
-    private List<Alergia> alergias;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_alergia",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "alergia_id")
+    )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Set<Alergia> alergias = new HashSet<>();
 }

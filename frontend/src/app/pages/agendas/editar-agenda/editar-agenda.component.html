@@ -10,9 +10,13 @@
       <p-dropdown [options]="usuarios" optionLabel="nome" formControlName="usuario" placeholder="Selecione o paciente" [style]="{'width': '15vw'}" />
     </div>
 
-    <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
+    <div style="display: flex; flex-direction: column; margin-bottom: 12vh">
       <label>Vacina</label>
       <p-dropdown [options]="vacinas" optionLabel="titulo" formControlName="vacina" placeholder="Selecione a vacina" [style]="{'width': '15vw'}" />
     </div>
+
+    <p-button [style]="{'width': '15vw', 'display':'flex', 'justify-content':'center'}" (click)="cadastrarAgendamento()">
+      <span>{{config.data ? 'Salvar':'Cadastrar'}}</span>
+    </p-button>
   </form>
 </div>

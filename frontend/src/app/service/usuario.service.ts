@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import {Usuario, usuarios, usuariosDropdown} from '../interface/usuario';
+import {HttpClient} from '@angular/common/http';
+import {HOST_URL} from './agenda.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  constructor() { }
+  constructor(private http : HttpClient) { }
 
-  getUsuarios ():Usuario[]{
-    return usuarios
+  getUsuarios () : Observable<any>{
+    return this.http.get(HOST_URL + '/usuario')
   }
 
-  getUsuariosDropdown ():Usuario[]{
-    return usuariosDropdown
-  }
 }

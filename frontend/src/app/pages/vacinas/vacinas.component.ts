@@ -21,15 +21,15 @@ import {TooltipModule} from 'primeng/tooltip';
   styleUrl: './vacinas.component.css'
 })
 export class VacinasComponent implements OnInit{
-  private readonly _vacinaService: VacinaService;
   vacinas!: Vacina[];
 
-  constructor(vacinaService: VacinaService) {
-    this._vacinaService = vacinaService
+  constructor(private vacinaService: VacinaService) {
   }
 
   ngOnInit() {
-    this.vacinas = this._vacinaService.getVacinas()
+    this.vacinaService.getVacinas().subscribe({
+      next: result => this.vacinas = result
+    })
   }
 
   protected readonly Periodicidade = Periodicidade;

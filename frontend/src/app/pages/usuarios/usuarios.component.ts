@@ -22,14 +22,14 @@ import {Usuario} from '../../interface/usuario';
   styleUrl: './usuarios.component.css'
 })
 export class UsuariosComponent implements OnInit{
-  private readonly _usuarioService: UsuarioService;
   usuarios!: Usuario[];
 
-  constructor(usuarioService: UsuarioService) {
-    this._usuarioService = usuarioService;
+  constructor(private usuarioService: UsuarioService) {
   }
 
   ngOnInit() {
-    this.usuarios = this._usuarioService.getUsuarios()
+    this.usuarioService.getUsuarios().subscribe({
+      next: result => this.usuarios = result
+    })
   }
 }

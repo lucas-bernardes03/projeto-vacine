@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Alergia, alergias} from '../interface/alergia';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {HOST_URL} from './agenda.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlergiaService {
-  constructor() { }
-
-  getAlergias(): Alergia[]{
-    return alergias
+  constructor(private http : HttpClient) { }
+  getAlergias(): Observable<any>{
+    return this.http.get(HOST_URL + '/alergia');
   }
 }

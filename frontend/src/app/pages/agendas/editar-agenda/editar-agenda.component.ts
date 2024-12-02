@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {FloatLabelModule} from 'primeng/floatlabel';
 import {DropdownModule} from 'primeng/dropdown';
-import {Vacina, vacinas} from '../../../interface/vacina';
-import {Usuario, usuarios} from '../../../interface/usuario';
+import {Vacina} from '../../../interface/vacina';
+import {Usuario} from '../../../interface/usuario';
 import {VacinaService} from '../../../service/vacina.service';
 import {UsuarioService} from '../../../service/usuario.service';
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-editar-agenda',
@@ -24,28 +25,48 @@ import {UsuarioService} from '../../../service/usuario.service';
   styleUrl: './editar-agenda.component.css'
 })
 export class EditarAgendaComponent implements OnInit{
-  private readonly _usuarioService: UsuarioService;
-  private readonly _vacinaService: VacinaService;
-
   form!: FormGroup
 
   vacinas!: Vacina[]
   usuarios!: Usuario[]
 
-  constructor(vacinaService: VacinaService,
-              usuarioService: UsuarioService) {
-    this._vacinaService = vacinaService;
-    this._usuarioService = usuarioService;
+  constructor(private vacinaService: VacinaService,
+              private usuarioService: UsuarioService,
+              public ref : DynamicDialogRef,
+              public config : DynamicDialogConfig) {
+
+    console.log(this.config.data)
   }
 
   ngOnInit() {
-    this.usuarios = this._usuarioService.getUsuariosDropdown()
-    this.vacinas = this._vacinaService.getVacinasDropdown()
+    this.usuarioService.getUsuarios().subscribe({
+      next: result => this.usuarios = result
+    })
+
+    this.vacinaService.getVacinas().subscribe({
+      next: result => this.vacinas = result
+    })
 
     this.form = new FormGroup({
+      id: new FormControl<Number | null>(null),
       data: new FormControl<Date | null>(null),
       vacina: new FormControl<Vacina | null>(null),
       usuario: new FormControl<Usuario | null>(null)
     })
+
+    if(this.config.data) this.popularForm()
+  }
+
+  popularForm(){
+    this.form.get('id')?.patchValue((this.config.data.id))
+    let data = new Date(this.config.data.data)
+    this.form.get('data')?.patchValue(data)
+    this.form.get('vacina')?.patchValue(this.config.data.vacina)
+    this.form.get('usuario')?.patchValue(this.config.data.usuario)
+  }
+
+  cadastrarAgendamento(){
+
+    this.ref.close()
   }
 }

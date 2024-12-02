@@ -41,19 +41,19 @@
           <td style="text-align: center">{{agenda.vacina.titulo}}</td>
           <td style="text-align: center">{{agenda.observacoes}}</td>
           <td style="text-align: center">
-            <div [ngClass]="{'cancelada': agenda.situacao == 'Cancelada', 'agendada' : agenda.situacao == 'Agendada', 'realizada' : agenda.situacao == 'Realizada'}">
+            <div [ngClass]="{'cancelada': agenda.situacao == 'Cancelado', 'agendada' : agenda.situacao == 'Agendado', 'realizada' : agenda.situacao == 'Realizado'}">
               {{agenda.situacao}}
             </div>
           </td>
           <td style="text-align: center">
-            <p-button pTooltip="Baixa" tooltipPosition="top" *ngIf="agenda.situacao == 'Agendada'" icon="pi pi-check" [text]="true" [rounded]="true"></p-button>
-            <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" [text]="true" [rounded]="true"></p-button>
-            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" [text]="true" [rounded]="true"></p-button>
+            <p-button pTooltip="Baixa" tooltipPosition="top" *ngIf="agenda.situacao == 'Agendado'" icon="pi pi-check" [text]="true" [rounded]="true"></p-button>
+            <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" [text]="true" [rounded]="true" (click)="editar(agenda)"></p-button>
+            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" [text]="true" [rounded]="true" (click)="excluir(agenda, $event)"></p-button>
           </td>
         </tr>
       </ng-template>
     </p-table>
   </div>
 
-
+  <p-confirmDialog />
 </div>
