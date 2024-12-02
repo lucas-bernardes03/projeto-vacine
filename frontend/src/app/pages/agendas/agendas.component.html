@@ -46,7 +46,7 @@
             </div>
           </td>
           <td style="text-align: center">
-            <p-button pTooltip="Baixa" tooltipPosition="top" *ngIf="agenda.situacao == 'Agendado'" icon="pi pi-check" [text]="true" [rounded]="true"></p-button>
+            <p-button pTooltip="Baixa" tooltipPosition="top" *ngIf="agenda.situacao == 'Agendado'" icon="pi pi-check" [text]="true" [rounded]="true" (click)="darBaixa(agenda)"></p-button>
             <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" [text]="true" [rounded]="true" (click)="editar(agenda)"></p-button>
             <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" [text]="true" [rounded]="true" (click)="excluir(agenda, $event)"></p-button>
           </td>
@@ -56,4 +56,5 @@
   </div>
 
   <p-confirmDialog />
+  <p-toast/>
 </div>

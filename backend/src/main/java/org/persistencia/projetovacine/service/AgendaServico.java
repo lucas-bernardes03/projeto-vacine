@@ -18,7 +18,17 @@ public class AgendaServico {
         return agendaRepository.findAll();
     }
 
-    public Agenda criarAgenda(Agenda agenda){
+    public Agenda criarAlterarAgenda(Agenda agenda){
         return agendaRepository.save(agenda);
     }
+
+    public Agenda darBaixa(Agenda agenda){
+        Agenda agendaAtual = agendaRepository.findById(agenda.getId()).get();
+        agendaAtual.setDataSituacao(agenda.getDataSituacao());
+        agendaAtual.setSituacao(agenda.getSituacao());
+        agendaAtual.setObservacoes(agenda.getObservacoes());
+        return agendaRepository.save(agendaAtual);
+    }
+
+    public void excluirAgenda(Agenda agenda) { agendaRepository.delete(agenda); }
 }

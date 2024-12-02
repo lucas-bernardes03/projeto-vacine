@@ -1,0 +1,18 @@
+<div class="form">
+  <form [formGroup]="form">
+
+    <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
+      <label>Nova Situação</label>
+      <p-dropdown [options]="situacoes" formControlName="situacao" placeholder="Selecione a situação..." [style]="{'width': '15vw'}" />
+    </div>
+
+    <div style="display: flex; flex-direction: column; margin-bottom: 6vh">
+      <label>Observações</label>
+      <textarea rows="5" cols="30" pInputTextarea formControlName="observacoes"></textarea>
+    </div>
+
+    <p-button [style]="{'width': '15vw', 'display':'flex', 'justify-content':'center'}" (click)="baixa()">
+      <span>Dar Baixa</span>
+    </p-button>
+  </form>
+</div>

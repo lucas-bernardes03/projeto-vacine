@@ -26,7 +26,25 @@ public class AgendaController {
 
     @PostMapping
     public ResponseEntity<Agenda> criarAgenda(@RequestBody Agenda agenda){
-        Agenda agendaCriada = agendaServico.criarAgenda(agenda);
+        Agenda agendaCriada = agendaServico.criarAlterarAgenda(agenda);
         return ResponseEntity.ok(agendaCriada);
+    }
+
+    @PutMapping
+    public ResponseEntity<Agenda> alterarAgenda(@RequestBody Agenda agenda){
+        Agenda agendaAlterada = agendaServico.criarAlterarAgenda(agenda);
+        return ResponseEntity.ok(agendaAlterada);
+    }
+
+    @PutMapping(value = "/baixa")
+    public ResponseEntity<Agenda> baixaAgenda(@RequestBody Agenda agenda){
+        Agenda agendaAlterada = agendaServico.darBaixa(agenda);
+        return ResponseEntity.ok(agendaAlterada);
+    }
+
+    @DeleteMapping
+    public ResponseEntity excluirAgenda(@RequestBody Agenda agenda){
+        agendaServico.excluirAgenda(agenda);
+        return ResponseEntity.ok().build();
     }
 }

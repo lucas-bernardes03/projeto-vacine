@@ -8,8 +8,10 @@ import {TooltipModule} from 'primeng/tooltip';
 import {DialogModule} from 'primeng/dialog';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {EditarAgendaComponent} from './editar-agenda/editar-agenda.component';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ToastModule} from 'primeng/toast';
+import {DarBaixaComponent} from './dar-baixa/dar-baixa.component';
 
 @Component({
   selector: 'app-agendas',
@@ -24,6 +26,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     TooltipModule,
     DialogModule,
     ConfirmDialogModule,
+    ToastModule,
   ],
   templateUrl: './agendas.component.html',
   styleUrl: './agendas.component.css',
@@ -35,16 +38,24 @@ export class AgendasComponent implements OnInit{
 
   constructor(private agendaService: AgendaService,
               private dialogService : DialogService,
+              private messageService: MessageService,
               private confirmationService : ConfirmationService) {
 
   }
 
-  ngOnInit() {
+  listarAgendas(){
     this.agendaService.getAgendas().subscribe({
       next: result => {
         this.agendas = result
+      },
+      error: () => {
+        this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao listar agendamentos'})
       }
     })
+  }
+
+  ngOnInit() {
+    this.listarAgendas()
 
   }
 
@@ -52,7 +63,14 @@ export class AgendasComponent implements OnInit{
     this.ref = this.dialogService.open(EditarAgendaComponent, {
       header: 'Novo Agendamento',
       width: '20vw',
-      height: '55vh'
+      height: '65vh'
+    })
+
+    this.ref.onClose.subscribe(result => {
+      if(result){
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Novo agendamento cadastrado com sucesso!'})
+        this.listarAgendas()
+      }
     })
   }
 
@@ -61,7 +79,14 @@ export class AgendasComponent implements OnInit{
       data: agendamento,
       header: 'Editar Agendamento',
       width: '20vw',
-      height: '55vh'
+      height: '65vh'
+    })
+
+    this.ref.onClose.subscribe(result => {
+      if(result){
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Agendamento alterado com sucesso!'})
+        this.listarAgendas()
+      }
     })
   }
 
@@ -75,10 +100,33 @@ export class AgendasComponent implements OnInit{
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
       accept: () => {
-        console.log('aceito')
+        this.agendaService.excluirAgenda(agendamento).subscribe({
+          next: () => {
+            this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Agendamento excluído com sucesso!'})
+            this.listarAgendas()
+          },
+          error: () => {
+            this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao excluir agendamento'})
+          }
+        })
       },
       reject: () => {
-        console.log('aceito nao pai')
+      }
+    })
+  }
+
+  darBaixa(agendamento: Agenda){
+    this.ref = this.dialogService.open(DarBaixaComponent, {
+      data: agendamento,
+      header: 'Baixa',
+      width: '20vw',
+      height: '50vh'
+    })
+
+    this.ref.onClose.subscribe(result => {
+      if(result){
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Baixa realizada com sucesso!'})
+        this.listarAgendas()
       }
     })
   }

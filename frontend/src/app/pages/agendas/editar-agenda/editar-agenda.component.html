@@ -1,18 +1,23 @@
 <div class="form">
   <form [formGroup]="form">
     <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
-      <label>Data do Agendamento</label>
-      <p-calendar [autofocus]="false" [style]="{'width': '15vw'}" [showIcon]="true" formControlName="data" dateFormat="dd/mm/yy"/>
-    </div>
-
-    <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
       <label>Paciente</label>
       <p-dropdown [options]="usuarios" optionLabel="nome" formControlName="usuario" placeholder="Selecione o paciente" [style]="{'width': '15vw'}" />
     </div>
 
-    <div style="display: flex; flex-direction: column; margin-bottom: 12vh">
+    <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
       <label>Vacina</label>
       <p-dropdown [options]="vacinas" optionLabel="titulo" formControlName="vacina" placeholder="Selecione a vacina" [style]="{'width': '15vw'}" />
+    </div>
+
+    <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
+      <label>Data do Agendamento</label>
+      <p-calendar [autofocus]="false" [style]="{'width': '15vw'}" [showIcon]="true" formControlName="data" dateFormat="dd/mm/yy"/>
+    </div>
+
+    <div style="display: flex; flex-direction: column; margin-bottom: 3vh">
+      <label>Observações</label>
+      <textarea rows="5" cols="30" pInputTextarea formControlName="observacoes"></textarea>
     </div>
 
     <p-button [style]="{'width': '15vw', 'display':'flex', 'justify-content':'center'}" (click)="cadastrarAgendamento()">

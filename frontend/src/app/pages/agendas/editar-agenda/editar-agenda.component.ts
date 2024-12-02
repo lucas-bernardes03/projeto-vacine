@@ -9,6 +9,10 @@ import {Usuario} from '../../../interface/usuario';
 import {VacinaService} from '../../../service/vacina.service';
 import {UsuarioService} from '../../../service/usuario.service';
 import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {AgendaService} from '../../../service/agenda.service';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @Component({
   selector: 'app-editar-agenda',
@@ -19,7 +23,9 @@ import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
     InputTextModule,
     CalendarModule,
     FloatLabelModule,
-    DropdownModule
+    DropdownModule,
+    ToastModule,
+    InputTextareaModule
   ],
   templateUrl: './editar-agenda.component.html',
   styleUrl: './editar-agenda.component.css'
@@ -32,10 +38,11 @@ export class EditarAgendaComponent implements OnInit{
 
   constructor(private vacinaService: VacinaService,
               private usuarioService: UsuarioService,
+              private agendaServico: AgendaService,
+              private messageService: MessageService,
               public ref : DynamicDialogRef,
               public config : DynamicDialogConfig) {
 
-    console.log(this.config.data)
   }
 
   ngOnInit() {
@@ -48,10 +55,12 @@ export class EditarAgendaComponent implements OnInit{
     })
 
     this.form = new FormGroup({
-      id: new FormControl<Number | null>(null),
+      id: new FormControl<Number | null>(null ),
       data: new FormControl<Date | null>(null),
       vacina: new FormControl<Vacina | null>(null),
-      usuario: new FormControl<Usuario | null>(null)
+      usuario: new FormControl<Usuario | null>(null),
+      situacao: new FormControl<String | null>("Agendado"),
+      observacoes: new FormControl<String | null>(null)
     })
 
     if(this.config.data) this.popularForm()
@@ -63,10 +72,51 @@ export class EditarAgendaComponent implements OnInit{
     this.form.get('data')?.patchValue(data)
     this.form.get('vacina')?.patchValue(this.config.data.vacina)
     this.form.get('usuario')?.patchValue(this.config.data.usuario)
+    this.form.get('situacao')?.patchValue(this.config.data.situacao)
+    this.form.get('observacoes')?.patchValue(this.config.data.observacoes)
+  }
+
+  validarForm(): boolean{
+    if(!this.form.get('usuario')?.value){
+      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Paciente é obrigatório'})
+      return false
+    }
+
+    if(!this.form.get('vacina')?.value){
+      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Vacina é obrigatório'})
+      return false
+    }
+
+    if(!this.form.get('data')?.value){
+      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Data é obrigatório'})
+      return false
+    }
+
+    return true
   }
 
   cadastrarAgendamento(){
+    if(!this.validarForm()) return
 
-    this.ref.close()
+    if(this.form.value.id){
+      this.agendaServico.novaAgenda(this.form.value).subscribe({
+        next: () => {
+          this.ref.close(true)
+        },
+        error: () => {
+          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao inserir agendamento'})
+        }
+      })
+    }
+    else {
+      this.agendaServico.salvarAgenda(this.form.value).subscribe({
+        next: () => {
+          this.ref.close(true)
+        },
+        error: () => {
+          this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao alterar agendamento'})
+        }
+      })
+    }
   }
 }
