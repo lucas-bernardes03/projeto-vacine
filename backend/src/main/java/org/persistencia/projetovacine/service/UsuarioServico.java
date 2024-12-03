@@ -19,7 +19,9 @@ public class UsuarioServico {
         return usuarioRepository.findAll();
     }
 
-    public Usuario criarUsuario(Usuario usuario){
+    public Usuario criarAlterarUsuario(Usuario usuario){
         return usuarioRepository.save(usuario);
     }
+
+    public void excluirUsuario(Usuario usuario) { usuarioRepository.delete(usuario); }
 }

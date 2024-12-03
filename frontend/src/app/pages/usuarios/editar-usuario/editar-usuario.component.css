@@ -4,3 +4,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.formrow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vh;
+}

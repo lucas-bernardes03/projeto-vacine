@@ -14,7 +14,7 @@ export class UsuarioService {
     return this.http.get(HOST_URL + '/usuario')
   }
 
-  novaUsuario(usuario: Usuario): Observable<any>{
+  novoUsuario(usuario: Usuario): Observable<any>{
     return this.http.post(HOST_URL + '/usuario', usuario)
   }
 

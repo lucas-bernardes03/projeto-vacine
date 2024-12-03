@@ -1,6 +1,7 @@
 package org.persistencia.projetovacine.controller;
 
 import org.persistencia.projetovacine.model.Usuario;
+import org.persistencia.projetovacine.model.Usuario;
 import org.persistencia.projetovacine.service.UsuarioServico;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,19 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario){
-        Usuario usuarioCriado = usuarioServico.criarUsuario(usuario);
-        return ResponseEntity.ok(usuarioCriado);
+        Usuario usuarioCriada = usuarioServico.criarAlterarUsuario(usuario);
+        return ResponseEntity.ok(usuarioCriada);
+    }
+
+    @PutMapping
+    public ResponseEntity<Usuario> alterarUsuario(@RequestBody Usuario usuario){
+        Usuario usuarioAlterada = usuarioServico.criarAlterarUsuario(usuario);
+        return ResponseEntity.ok(usuarioAlterada);
+    }
+
+    @DeleteMapping
+    public ResponseEntity excluirUsuario(@RequestBody Usuario usuario){
+        usuarioServico.excluirUsuario(usuario);
+        return ResponseEntity.ok().build();
     }
 }

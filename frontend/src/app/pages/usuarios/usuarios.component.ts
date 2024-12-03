@@ -41,8 +41,8 @@ export class UsuariosComponent implements OnInit{
   adicionar(){
     this.ref = this.dialogService.open(EditarUsuarioComponent, {
       header: 'Novo Usuário',
-      width: '20vw',
-      height: '65vh'
+      width: '50vw',
+      height: '50vh'
     })
 
     this.ref.onClose.subscribe(result => {
@@ -57,8 +57,8 @@ export class UsuariosComponent implements OnInit{
     this.ref = this.dialogService.open(EditarUsuarioComponent, {
       data: usuario,
       header: 'Editar Usuario',
-      width: '20vw',
-      height: '65vh'
+      width: '50vw',
+      height: '50vh'
     })
 
     this.ref.onClose.subscribe(result => {
