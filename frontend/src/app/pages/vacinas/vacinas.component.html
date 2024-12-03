@@ -4,7 +4,7 @@
       <ng-template pTemplate="caption">
         <div class="table-caption">
           Vacinas
-          <p-button>
+          <p-button (click)="adicionar()">
             Adicionar
             <i class="pi pi-plus" style="margin-left: 1rem; font-weight: bold"></i>
           </p-button>
@@ -42,8 +42,8 @@
           <td style="text-align: center">{{vacina.periodicidade == Periodicidade.DIA ? "Dias" : vacina.periodicidade == Periodicidade.SEMANA ? "Semanas" : vacina.periodicidade == Periodicidade.MES ? "Meses" : "Anos"}}</td>
           <td style="text-align: center">{{vacina.intervalo}}</td>
           <td style="text-align: center">
-            <p-button pTooltip="Editar" tooltipPosition="top"  icon="pi pi-pencil" [text]="true" [rounded]="true"></p-button>
-            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" [text]="true" [rounded]="true"></p-button>
+            <p-button pTooltip="Editar" tooltipPosition="top"  icon="pi pi-pencil" [text]="true" [rounded]="true" (click)="editar(vacina)"></p-button>
+            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" [text]="true" [rounded]="true" (click)="excluir(vacina, $event)"></p-button>
           </td>
         </tr>
       </ng-template>

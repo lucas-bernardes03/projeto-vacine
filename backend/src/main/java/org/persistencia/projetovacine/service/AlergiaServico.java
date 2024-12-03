@@ -19,7 +19,9 @@ public class AlergiaServico {
         return alergiaRepository.findAll();
     }
 
-    public Alergia criarAlergia(Alergia alergia){
+    public Alergia criarAlterarAlergia(Alergia alergia){
         return alergiaRepository.save(alergia);
     }
+
+    public void excluirAlergia(Alergia alergia) { alergiaRepository.delete(alergia); }
 }

@@ -1,0 +1,12 @@
+<div class="form">
+  <form [formGroup]="form">
+    <div style="display: flex; flex-direction: column; margin-bottom: 6vh">
+      <label>Nome</label>
+      <input pInputText formControlName="nome" [style]="{'width': '15vw'}" />
+    </div>
+
+    <p-button [style]="{'width': '15vw', 'display':'flex', 'justify-content':'center'}" (click)="cadastrarAlergia()">
+      <span>{{config.data ? 'Salvar':'Cadastrar'}}</span>
+    </p-button>
+  </form>
+</div>

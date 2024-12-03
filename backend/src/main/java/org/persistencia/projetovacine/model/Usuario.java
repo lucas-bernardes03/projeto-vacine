@@ -30,12 +30,11 @@ public class Usuario {
     private String cidade;
     private String uf;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "usuario_alergia",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "alergia_id")
     )
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Alergia> alergias = new HashSet<>();
 }

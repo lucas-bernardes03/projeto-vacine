@@ -7,6 +7,8 @@ import {SidebarModule} from 'primeng/sidebar';
 import {menuRoutes} from '../../app.routes';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {LoginService} from '../../service/login.service';
+import {ToastModule} from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-shell',
@@ -18,7 +20,9 @@ import {LoginService} from '../../service/login.service';
     PrimeTemplate,
     SidebarModule,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    ToastModule,
+    ConfirmDialogModule
   ],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.css'

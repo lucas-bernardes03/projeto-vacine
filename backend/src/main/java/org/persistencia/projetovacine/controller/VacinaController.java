@@ -1,6 +1,7 @@
 package org.persistencia.projetovacine.controller;
 
 import org.persistencia.projetovacine.model.Vacina;
+import org.persistencia.projetovacine.model.Vacina;
 import org.persistencia.projetovacine.service.VacinaServico;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,19 @@ public class VacinaController {
 
     @PostMapping
     public ResponseEntity<Vacina> criarVacina(@RequestBody Vacina vacina){
-        Vacina vacinaCriada = vacinaServico.criarVacina(vacina);
+        Vacina vacinaCriada = vacinaServico.criarAlterarVacina(vacina);
         return ResponseEntity.ok(vacinaCriada);
+    }
+
+    @PutMapping
+    public ResponseEntity<Vacina> alterarVacina(@RequestBody Vacina vacina){
+        Vacina vacinaAlterada = vacinaServico.criarAlterarVacina(vacina);
+        return ResponseEntity.ok(vacinaAlterada);
+    }
+
+    @DeleteMapping
+    public ResponseEntity excluirVacina(@RequestBody Vacina vacina){
+        vacinaServico.excluirVacina(vacina);
+        return ResponseEntity.ok().build();
     }
 }

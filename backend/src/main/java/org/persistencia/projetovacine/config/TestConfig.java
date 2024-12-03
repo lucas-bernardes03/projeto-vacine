@@ -1,6 +1,5 @@
 package org.persistencia.projetovacine.config;
 
-import org.persistencia.projetovacine.enums.PeriodicidadeEnum;
 import org.persistencia.projetovacine.model.Agenda;
 import org.persistencia.projetovacine.model.Alergia;
 import org.persistencia.projetovacine.model.Usuario;
@@ -49,11 +48,11 @@ public class TestConfig implements CommandLineRunner {
 
         usuarioRepository.saveAll(Arrays.asList(u1,u2,u3,u4,u5));
 
-        Vacina v1 = new Vacina(null, "vacina 1", "teste", 2, PeriodicidadeEnum.MES, 2);
-        Vacina v2 = new Vacina(null, "vacina 2", "bola", 2, PeriodicidadeEnum.DIA, 15);
-        Vacina v3 = new Vacina(null, "vacina 3", "quadrado", 2, PeriodicidadeEnum.ANO, 3);
-        Vacina v4 = new Vacina(null, "vacina 4", "hieroglifo", 2, PeriodicidadeEnum.SEMANA, 7);
-        Vacina v5 = new Vacina(null, "vacina 5", "corte", 2, PeriodicidadeEnum.MES, 4);
+        Vacina v1 = new Vacina(null, "vacina 1", "teste", 2, Vacina.PERIODICIDADE_MES, 2);
+        Vacina v2 = new Vacina(null, "vacina 2", "bola", 2, Vacina.PERIODICIDADE_DIA, 15);
+        Vacina v3 = new Vacina(null, "vacina 3", "quadrado", 2, Vacina.PERIODICIDADE_ANO, 3);
+        Vacina v4 = new Vacina(null, "vacina 4", "hieroglifo", 2, Vacina.PERIODICIDADE_SEMANA, 7);
+        Vacina v5 = new Vacina(null, "vacina 5", "corte", 2, Vacina.PERIODICIDADE_MES, 4);
 
         vacinaRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5));
 

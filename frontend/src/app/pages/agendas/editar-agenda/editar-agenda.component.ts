@@ -67,7 +67,7 @@ export class EditarAgendaComponent implements OnInit{
   }
 
   popularForm(){
-    this.form.get('id')?.patchValue((this.config.data.id))
+    this.form.get('id')?.patchValue(this.config.data.id)
     let data = new Date(this.config.data.data)
     this.form.get('data')?.patchValue(data)
     this.form.get('vacina')?.patchValue(this.config.data.vacina)
