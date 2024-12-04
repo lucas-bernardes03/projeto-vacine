@@ -9,8 +9,8 @@
       <div style="display: flex; flex-direction: column; margin-bottom: 5vh">
         <label>Senha</label>
         <p-password [inputStyle]="{'width': '100%'}" [style]="{'width': '100%'}" [feedback]="false" formControlName="senha"></p-password>
-        <label style="margin-top: 1vh">
-          <a [style]="{'color':'white'}" [routerLink]="'/register'">Não tem conta? Cadastre-se</a>
+        <label class="registerLink">
+          <a (click)="registrar()">Não tem conta? Cadastre-se</a>
         </label>
       </div>
     </div>

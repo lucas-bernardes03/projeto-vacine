@@ -5,7 +5,6 @@ import {AlergiasComponent} from './pages/alergias/alergias.component';
 import {UsuariosComponent} from './pages/usuarios/usuarios.component';
 import {LoginComponent} from './pages/login/login.component';
 import {ShellComponent} from './pages/shell/shell.component';
-import {RegisterComponent} from './pages/register/register.component';
 import {authGuard} from './auth.guard';
 
 export const routes: Routes = [
@@ -17,7 +16,6 @@ export const routes: Routes = [
       {path: 'usuarios', component: UsuariosComponent, title: 'Usuários', canActivate: [authGuard]},
     ]},
   {path: 'login', component: LoginComponent, title: 'Login'},
-  {path: 'register', component: RegisterComponent, title: 'Registrar'},
   {path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 

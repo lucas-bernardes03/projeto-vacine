@@ -7,6 +7,8 @@ import {IUsuario, LoginService} from '../../service/login.service';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {RegisterComponent} from './register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +27,11 @@ import {ToastModule} from 'primeng/toast';
 export class LoginComponent implements OnInit{
   form!: FormGroup
 
+  ref: DynamicDialogRef | undefined
+
   constructor(private loginService : LoginService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private dialogService : DialogService) {
   }
 
   ngOnInit() {
@@ -43,6 +48,20 @@ export class LoginComponent implements OnInit{
         if(!response.sucesso){
           this.messageService.add({severity: 'error', summary: 'Falha na Autenticação', detail: 'Usuário ou senha incorretos.'})
         }
+      }
+    })
+  }
+
+  registrar(){
+    this.ref = this.dialogService.open(RegisterComponent, {
+      header: 'Nova Conta',
+      width: '20vw',
+      height: '45vh'
+    })
+
+    this.ref.onClose.subscribe(result => {
+      if(result){
+        this.messageService.add({severity: 'success', summary: 'Sucesso', detail: 'Conta cadastrada!'})
       }
     })
   }
