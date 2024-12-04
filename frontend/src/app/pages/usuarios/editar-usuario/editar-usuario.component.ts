@@ -9,6 +9,9 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {Alergia} from '../../../interface/alergia';
+import {AlergiaService} from '../../../service/alergia.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -20,7 +23,8 @@ import {InputNumberModule} from 'primeng/inputnumber';
     InputTextareaModule,
     ReactiveFormsModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    MultiSelectModule
   ],
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css'
@@ -30,15 +34,22 @@ export class EditarUsuarioComponent implements OnInit{
 
   sexos = ['M', 'F']
   ufs= ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']
+  alergias!: Alergia[]
 
   constructor(private usuarioService: UsuarioService,
               private messageService: MessageService,
+              private alergiaService: AlergiaService,
               public ref : DynamicDialogRef,
               public config : DynamicDialogConfig) {
 
   }
 
   ngOnInit() {
+    this.alergiaService.getAlergias().subscribe({
+      next: result => this.alergias = result,
+      error: () => this.messageService.add({severity: 'error', summary: 'Erro', detail: 'Erro ao listar alergias'})
+    })
+
     this.form = new FormGroup({
       id: new FormControl<Number | null>(null ),
       nome: new FormControl<String | null>(null),
@@ -49,6 +60,7 @@ export class EditarUsuarioComponent implements OnInit{
       setor: new FormControl<String | null>(null),
       cidade: new FormControl<String | null>(null),
       uf: new FormControl<String | null>(null),
+      alergias: new FormControl<Alergia[] | null>(null)
     })
 
     if(this.config.data) this.popularForm()
@@ -65,6 +77,7 @@ export class EditarUsuarioComponent implements OnInit{
     this.form.get('setor')?.patchValue(this.config.data.setor)
     this.form.get('cidade')?.patchValue(this.config.data.cidade)
     this.form.get('uf')?.patchValue(this.config.data.uf)
+    this.form.get('alergias')?.patchValue(this.config.data.alergias)
   }
 
   validarForm(): boolean{
