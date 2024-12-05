@@ -9,6 +9,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {PaginatorModule} from 'primeng/paginator';
 import {InputTextModule} from 'primeng/inputtext';
 import {MessageService} from 'primeng/api';
+import {PasswordModule} from 'primeng/password';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ import {MessageService} from 'primeng/api';
     InputTextareaModule,
     PaginatorModule,
     ReactiveFormsModule,
-    InputTextModule
+    InputTextModule,
+    PasswordModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -34,18 +36,18 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit() {
     this.form = new FormGroup({
-      usuario: new FormControl<String | null>(null),
-      senha: new FormControl<String | null>(null)
+      username: new FormControl<String | null>(null),
+      password: new FormControl<String | null>(null)
     })
   }
 
   validarForm(): boolean{
-    if(!this.form.get('usuario')?.value){
-      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Usuário é obrigatório'})
+    if(!this.form.get('username')?.value){
+      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Username é obrigatório'})
       return false
     }
 
-    if(!this.form.get('senha')?.value){
+    if(!this.form.get('password')?.value){
       this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Senha é obrigatório'})
       return false
     }

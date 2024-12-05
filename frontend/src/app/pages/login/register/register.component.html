@@ -2,12 +2,12 @@
   <form [formGroup]="form">
     <div style="display: flex; flex-direction: column; margin-bottom: 2vh">
       <label>Usuário</label>
-      <input pInputText formControlName="usuario" [style]="{'width': '15vw'}" />
+      <input pInputText formControlName="username" [style]="{'width': '15vw'}" />
     </div>
 
     <div style="display: flex; flex-direction: column; margin-bottom: 8vh">
       <label>Senha</label>
-      <input pInputText formControlName="senha" [style]="{'width': '15vw'}" />
+      <p-password formControlName="password" [style]="{'width': '15vw'}" [inputStyle]="{'width': '15vw'}"/>
     </div>
 
     <p-button [style]="{'width': '15vw', 'display':'flex', 'justify-content':'center'}" (click)="cadastrar()">

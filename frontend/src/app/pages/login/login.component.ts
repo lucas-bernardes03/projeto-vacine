@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Button} from 'primeng/button';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {InputTextModule} from 'primeng/inputtext';
 import {PasswordModule} from 'primeng/password';
 import {IUsuario, LoginService} from '../../service/login.service';
@@ -31,25 +31,47 @@ export class LoginComponent implements OnInit{
 
   constructor(private loginService : LoginService,
               private messageService: MessageService,
-              private dialogService : DialogService) {
+              private dialogService : DialogService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.form = new FormGroup({
-      usuario: new FormControl<String | null>(null),
-      senha: new FormControl<String | null>(null)
+      username: new FormControl<String | null>(null),
+      password: new FormControl<String | null>(null)
     })
   }
 
   logar(){
+    if(!this.validarForm()) return
+
     let usuario = this.form.value as IUsuario
     this.loginService.login(usuario).subscribe({
       next: response => {
+        console.log('resposta login: ', response)
         if(!response.sucesso){
           this.messageService.add({severity: 'error', summary: 'Falha na Autenticação', detail: 'Usuário ou senha incorretos.'})
         }
+
+        localStorage.setItem('token', btoa(JSON.stringify(response.Token)));
+        localStorage.setItem('contaId', btoa(JSON.stringify(response.contaId)));
+        this.router.navigate(['']);
       }
     })
+  }
+
+  validarForm(): boolean{
+    if(!this.form.get('username')?.value){
+      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Username é obrigatório'})
+      return false
+    }
+
+    if(!this.form.get('password')?.value){
+      this.messageService.add({severity: 'warn', summary: 'Campo Obrigatório', detail: 'Senha é obrigatório'})
+      return false
+    }
+
+    return true
   }
 
   registrar(){
