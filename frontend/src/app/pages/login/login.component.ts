@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit{
     let usuario = this.form.value as IUsuario
     this.loginService.login(usuario).subscribe({
       next: response => {
-        console.log('resposta login: ', response)
         if(!response.sucesso){
           this.messageService.add({severity: 'error', summary: 'Falha na Autenticação', detail: 'Usuário ou senha incorretos.'})
         }
@@ -56,6 +55,9 @@ export class LoginComponent implements OnInit{
         localStorage.setItem('token', btoa(JSON.stringify(response.Token)));
         localStorage.setItem('contaId', btoa(JSON.stringify(response.contaId)));
         this.router.navigate(['']);
+      },
+      error: err => {
+        this.messageService.add({severity: 'error', summary: 'Falha na Autenticação', detail: 'Usuário ou senha incorretos.'})
       }
     })
   }
