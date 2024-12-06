@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.persistencia.projetovacine.enums.SituacaoEnum;
 
 import java.util.Date;
 
@@ -17,7 +18,7 @@ public class Agenda {
     private Long id;
 
     private Date data;
-    private String situacao;
+    private SituacaoEnum situacao;
     private Date dataSituacao;
     private String observacoes;
 

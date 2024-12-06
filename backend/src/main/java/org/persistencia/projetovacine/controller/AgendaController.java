@@ -27,7 +27,7 @@ public class AgendaController {
     }
 
     @PostMapping
-    public ResponseEntity<Agenda> criarAgenda(@RequestBody Agenda agenda){
+    public ResponseEntity<Agenda> criarAgenda(@RequestBody Agenda agenda) {
         Agenda agendaCriada = agendaServico.criarAgenda(agenda);
         return ResponseEntity.ok(agendaCriada);
     }
